@@ -50,7 +50,6 @@ public class UploadServlet extends HttpServlet {
         try {
             List items = upload.parseRequest(request);
             Iterator iter = items.iterator();
-
             while (iter.hasNext()) {
                 FileItem item = (FileItem) iter.next();
 
@@ -99,7 +98,7 @@ public class UploadServlet extends HttpServlet {
         File uploadetFile = new File(home_pth+"//"+sessionId+"//"+ Filename);
         //выбираем файлу имя пока не найдём свободное
 
-        if(!uploadetFile.exists()) {
+        if(!uploadetFile.exists()&&Filename!="") {
             int ExtIndex = Filename.indexOf('.');
             if(Filename.substring(ExtIndex).toLowerCase().equals(".pdf")) {
 
