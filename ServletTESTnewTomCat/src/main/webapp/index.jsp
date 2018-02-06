@@ -17,13 +17,9 @@
   Выберите .pdf файл:<br>
   <input type="file" name="uploadFile" />
   <br/><br/>
-  <input type="submit" value="Загрузить" />
+  <input type="submit" value="Загрузить" /><br><br>
+<button href="/index.jsp" onclick="window.open('/process');">Обработать</button><br>
 
-</form>
-<form method="post" action="/process">
-  <input type="submit" value="Обработать" />
-
-</form>
 <div style="text-align: center;">
 
 
@@ -35,9 +31,17 @@
                            if (outParameter != null){%>
                            <%=  outParameter %> <br>
                            <% } else { %> <br> <% }%>
-<button onclick="/index.jsp" onclick="window.open('/process');">Обработать</button><br>
-<a href="/index.jsp" onclick="window.open('/process');">Обработать</a<br>
-
 </div>
+
+
+<!--
+</form>
+<form method="post" action="/process">
+  <input type="submit" value="Обработать" />
+
+</form>
+<a href="/index.jsp" onclick="window.open('/process');">Обработать</a<br>
+--!>
+
 </body>
 </html>

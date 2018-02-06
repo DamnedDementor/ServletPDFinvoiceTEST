@@ -45,7 +45,12 @@ public class FilesProcServlet extends HttpServlet {
         File folder = new File(home_pth+"//"+ sessionId);
         String Flist[] = folder.list();
 
-        if(Flist==null){request.getRequestDispatcher("index.jsp").forward(request, response);return;}
+        if(Flist==null)
+        {
+            request.setAttribute("message1","Нет загруженых файлов для обработки");
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+            return;
+        }
         //обрабатываем файл из списка файлов
         for(String s:Flist) {
             // проверяем действительно ли PDF
