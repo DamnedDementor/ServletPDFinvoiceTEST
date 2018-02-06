@@ -33,6 +33,9 @@ public class FilesProcServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        request.setAttribute("message1","Начало работы");
+        request.setAttribute("message2","");
+        request.setAttribute("message3","");
         doPost(request,response);
     }
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
@@ -47,7 +50,8 @@ public class FilesProcServlet extends HttpServlet {
 
         if(Flist==null)
         {
-            request.setAttribute("message1","Нет загруженых файлов для обработки");
+            if(((String)request.getAttribute("message3")).compareTo("")==0)
+                request.setAttribute("message3","Нет загруженых файлов для обработки");
             request.getRequestDispatcher("index.jsp").forward(request, response);
             return;
         }
@@ -100,7 +104,7 @@ public class FilesProcServlet extends HttpServlet {
             statement =connect.createStatement();
         } catch (SQLException e) {
             e.printStackTrace();
-            endConnection();
+        //    endConnection();
             return null;
         }
 
@@ -150,7 +154,7 @@ public class FilesProcServlet extends HttpServlet {
                                         +"("+ invoice+","+t_weight+","+n_weight+","+n_pack+")");
                     } catch (SQLException e) {
                         e.printStackTrace();
-                        endConnection();
+                     //   endConnection();
                         return null;
                     }
                 }
@@ -243,7 +247,7 @@ public class FilesProcServlet extends HttpServlet {
                                     +"('"+ code+"','"+name+"',"+quan+",'"+ed+"',"+w_brutto+",'"+invoice+"')");
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    endConnection();
+           //         endConnection();
                     return null;
                 }
 
@@ -346,7 +350,7 @@ public class FilesProcServlet extends HttpServlet {
             resultset = statement.executeQuery(T1_statement);
         }    catch (SQLException e) {
             e.printStackTrace();
-            endConnection();
+        //    endConnection();
             return ;
         }
 
@@ -398,7 +402,7 @@ public class FilesProcServlet extends HttpServlet {
 
         } catch (SQLException e) {
             e.printStackTrace();
-            endConnection();
+        //    endConnection();
             return ;
         }
         row_num++;
@@ -454,10 +458,10 @@ public class FilesProcServlet extends HttpServlet {
                 wb.getSheetAt(0).autoSizeColumn(colNum);
         } catch (SQLException e) {
             e.printStackTrace();
-            endConnection();
+       //     endConnection();
             return ;
         }
-        endConnection();
+     //   endConnection();
         // запись формул для подсчета в файл
         row = sheet.createRow(row_num);
         cell=row.createCell(1);
@@ -513,12 +517,15 @@ public class FilesProcServlet extends HttpServlet {
     void endConnection()
     {
         if(connect!=null)
+        {
             try {
                 connect.close();
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("Cant close connection");
             }
+            connect=null;
+        }
     }
 }
 
