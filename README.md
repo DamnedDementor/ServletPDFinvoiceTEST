@@ -4,6 +4,6 @@ Whats works:
 - adding items to mySQL base
 - extraction of data from mySQL base
 - forming and downloading EXCEL files
-Whats not/not so well:
+Whats not or not so well:
 - tesing and catching error states
 - front end gui
