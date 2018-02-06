@@ -1,6 +1,11 @@
-127.0.0.1 - - [06/Feb/2018:14:12:20 +0300] "GET / HTTP/1.1" 200 788 http-bio-8888-exec-1 1717
-127.0.0.1 - - [06/Feb/2018:14:12:24 +0300] "POST /upload HTTP/1.1" 200 1006 http-bio-8888-exec-2 176
-127.0.0.1 - - [06/Feb/2018:14:12:30 +0300] "POST /upload HTTP/1.1" 200 1004 http-bio-8888-exec-3 25
-127.0.0.1 - - [06/Feb/2018:14:12:34 +0300] "POST /upload HTTP/1.1" 200 1011 http-bio-8888-exec-4 77
-127.0.0.1 - - [06/Feb/2018:14:12:47 +0300] "GET /index.jsp HTTP/1.1" 200 788 http-bio-8888-exec-6 4
-127.0.0.1 - - [06/Feb/2018:14:12:57 +0300] "GET /process HTTP/1.1" 200 18432 http-bio-8888-exec-5 9536
+127.0.0.1 - - [06/Feb/2018:14:36:28 +0300] "GET / HTTP/1.1" 200 805 http-bio-8888-exec-1 2222
+127.0.0.1 - - [06/Feb/2018:14:36:32 +0300] "POST /upload HTTP/1.1" 200 1021 http-bio-8888-exec-3 159
+127.0.0.1 - - [06/Feb/2018:14:36:34 +0300] "POST /upload HTTP/1.1" 200 1020 http-bio-8888-exec-2 7
+127.0.0.1 - - [06/Feb/2018:14:36:38 +0300] "GET /process HTTP/1.1" 200 7168 http-bio-8888-exec-4 4267
+127.0.0.1 - - [06/Feb/2018:14:36:56 +0300] "GET /process HTTP/1.1" 200 897 http-bio-8888-exec-6 3
+127.0.0.1 - - [06/Feb/2018:14:36:56 +0300] "POST /upload HTTP/1.1" 200 1023 http-bio-8888-exec-7 3
+127.0.0.1 - - [06/Feb/2018:14:37:06 +0300] "GET /process HTTP/1.1" 200 897 http-bio-8888-exec-8 2
+127.0.0.1 - - [06/Feb/2018:14:37:06 +0300] "POST /upload HTTP/1.1" 200 1023 http-bio-8888-exec-5 3
+127.0.0.1 - - [06/Feb/2018:14:37:10 +0300] "POST /upload HTTP/1.1" 200 1021 http-bio-8888-exec-10 16
+127.0.0.1 - - [06/Feb/2018:14:37:11 +0300] "POST /upload HTTP/1.1" 200 1020 http-bio-8888-exec-9 3
+127.0.0.1 - - [06/Feb/2018:14:37:12 +0300] "GET /process HTTP/1.1" 500 1474 http-bio-8888-exec-1 99
