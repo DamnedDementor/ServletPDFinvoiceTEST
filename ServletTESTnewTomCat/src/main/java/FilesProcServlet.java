@@ -11,16 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.math.BigDecimal;
 import java.sql.*;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import static org.apache.poi.ss.formula.BaseFormulaEvaluator.evaluateAllFormulaCells;
 import static org.apache.poi.ss.usermodel.BorderStyle.MEDIUM;
-import static org.apache.poi.ss.usermodel.BorderStyle.THICK;
 import static org.apache.poi.ss.usermodel.BorderStyle.THIN;
 
 /**
@@ -262,40 +258,22 @@ public class FilesProcServlet extends HttpServlet {
         return invoice;
 
     }
-    //-------------------------------------------------------------------------------------------------------
-    // метод устанавливает соединение с базой данных
-    Connection Dbconnect()
-    {
-        Connection connection=connect;
-        if(connect==null) {
-            String userName = "root";
-            String password = "admin";
-            String url = "jdbc:mysql://localhost:3306/test?useSSL=false";
 
-            try {
-                Class.forName("com.mysql.jdbc.Driver").newInstance();
-                connection = DriverManager.getConnection(url, userName, password);
-            } catch (Exception e) {
-                System.out.println("Something wrong with driver");
-                return null;
-            }
-        }
-        return connection;
-    }
     //-------------------------------------------------------------------------------------------------------
     // метод конструирует строку запроса в БД для получения итоговой таблицы 1
     String makeStatementT1(ArrayList<String> invL)
     {
         String st="";
         String invs=" or invoice=";
-        st+="SELECT `code` as cod, `name` as nam, sum(quan)'sum', sum(w_brutto)'w_brutto', ed,"+
-                "(SELECT GROUP_CONCAT( DISTINCT invoice) from goods where `code`=cod and `name`=nam ) 'invoice'"
-                +" FROM goods where invoice="+ invL.get(0);;
+        st+="SELECT @Cod :=code as cod, @Nam :=name as nam, sum(quan)\"sum\", sum(w_brutto)\"w_brutto\", ed,(SELECT GROUP_CONCAT( DISTINCT invoice) from goods where code=@Cod  and name=@Nam ) \"invoice\"\n" +
+                "FROM goods \n" +
+                "where invoice="+ invL.get(0);
         for(int i=1;i<invL.size();i++)
         {
             st+= invs+ invL.get(i);
         }
-        st+=" GROUP BY `code`,`name`  ORDER BY `name`,invoice,`code`";
+        st+=" GROUP BY code,name,invoice\n" +
+                "ORDER BY name,invoice,code";
 
 //        System.out.println(st);;
         return st;
@@ -526,6 +504,43 @@ public class FilesProcServlet extends HttpServlet {
             }
             connect=null;
         }
+    }
+    //-------------------------------------------------------------------------------------------------------
+    // метод устанавливает соединение с базой данных
+    Connection Dbconnect()
+    {
+        Connection connection=connect;
+
+        // mySQL connect
+
+        if(connect==null) {
+            String userName = "root";
+            String password = "admin";
+            String url = "jdbc:mysql://localhost:3306/test?useSSL=false";
+
+            try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+                connection = DriverManager.getConnection(url, userName, password);
+            } catch (Exception e) {
+                System.out.println("Something wrong with driver");
+                return null;
+            }
+        }
+        // H2 connect
+        /*
+        if(connect==null) {
+            try {
+                Class.forName("org.h2.Driver");
+                connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+
+        }*/
+        return connection;
     }
 }
 
